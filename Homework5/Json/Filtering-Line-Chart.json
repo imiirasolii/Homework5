@@ -3,7 +3,7 @@
   "data": {"url": "https://raw.githubusercontent.com/imiirasolii/Homework5/main/Homework5/Data/z.csv"},
   "vconcat": [
     {
-    "width": 700,
+    "width": 750,
     "height": 60,
     "mark": {"type":"line","color": "#424241"},
     "params": [{
@@ -24,7 +24,7 @@
       }
 }
     },{
-    "width": 700,
+    "width": 750,
     "height": 300,
     "mark": {"type": "line", "line":true,"color": "#424241"}, 
     "encoding": {
@@ -42,7 +42,7 @@
     }
   ,
     {
-  "width": 700,
+  "width": 750,
   "height": 300,
   "mark": {"type": "line", "line": true},
   "params": [{
