@@ -1,0 +1,48 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Normalized Percentage Difference in Vehicle Incidents between 2019 and 2020 Per Local Government Area",
+        "fontSize": 20
+        },
+    "width": 1200,
+    "height": 800,
+    "projection": {"type": "equirectangular"},
+    "data": {
+    "url": "https://raw.githubusercontent.com/imiirasolii/Homework4/main/Homework4/js/vic_lga.topojson",
+    "format": {"type": "topojson", "feature": "vic_lga"}
+    },
+    "transform": [
+    {
+    "lookup": "properties.ABB_NAME",
+    "from": {
+    "data": {
+    "url": "https://raw.githubusercontent.com/imiirasolii/Homework4/main/Homework4/data/Subset_of_data.csv"
+    },
+    "key": "ABB_NAME",
+    "fields": ["Percentage Difference"]
+    }
+    }
+    ],
+    "mark": {"type": "geoshape"},
+    "encoding": {
+"color": {
+    "field": "Percentage Difference",
+    "type": "quantitative",
+    "scale": {
+    "type": "threshold",
+    "domain": [-80,-60,-40,-20],
+    "domainMax": -100,
+    "domainMin": 0,
+    "range": ["#a50f15", "#de2d26", "#fb6a4a", "#fcae91","#fee5d9"]
+    }
+    },
+    "tooltip": [
+    {"field": "properties.ABB_NAME", "type": "nominal", "title": "LGA Name"},
+    {"field": "Percentage Difference", "type": "quantitative"}
+    ]
+    },
+    "config": {
+        "title": {
+        "anchor": "start"}
+}
+}
