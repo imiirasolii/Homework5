@@ -1,27 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {"url": "https://raw.githubusercontent.com/imiirasolii/Homework5/main/Homework5/Data/z.csv"},
-    "vconcat": [{
-      "width": 500,
-      "mark": "area",
-      "encoding": {
-        "x": {
-          "field": "p",
-          "type": "temporal",
-          "scale": {"domain": {"param": "brush"}},
-          "axis": {"title": ""}
-        },
-        "y": {"field": "Accident",
-         "type": "quantitative"},
-        "color": {
-    "type": "nominal",
-    "field": "Accident Count",
-    "scale": {
-    "range": ["#fd8d3c"]
-    }
-  }
-      }
-    }, {
+    "vconcat": [
+      {
       "width": 500,
       "height": 60,
       "mark": "line",
@@ -31,26 +12,19 @@
       }],
       "encoding": {
         "x": {
-          "field": "p",
+          "field": "z",
           "type": "temporal"
         },
         "y": {
-          "field": "Accident",
+          "aggregate": "sum",
+        "field": "Count of Accidents",
           "type": "quantitative",
           "axis": {"tickCount": 3, "grid": false}
-        },
-        "color": {
-    "type": "nominal",
-    "field": "Accident Count",
-    "scale": {
-    "range": ["#fd8d3c"]
-    }
+        }
   }
-      }
-    },
-    {
+      },{
       "width": 500,
-      "mark": "bar",
+      "mark": "area",
       "encoding": {
         "x": {
           "field": "z",
@@ -58,14 +32,40 @@
           "scale": {"domain": {"param": "brush"}},
           "axis": {"title": ""}
         },
-        "y": {"field": "Count of Accidents",
-         "type": "quantitative"},
-      "color": {
-        "type":"ordinal",
-        "field": "Type of Loss",
-        "scale": {"range": ["#675193", "#ca8861","#675193"]}
+        "y": {"aggregate": "sum",
+        "field": "Count of Accidents",
+         "type": "quantitative"}
       }
+    },
+      {
+    "width": 500,
+    "height": 300,
+    "mark": "line",
+    "params": [{
+    "name": "Loss Type",
+    "select": {"type": "point", "fields": ["Type of Loss"]},
+    "bind": "legend"
+                }],
+    "encoding": {
+      "x": {
+        "field": "z",
+        "type": "temporal",
+        "axis": {"title":""},
+        "scale": {"domain": {"param": "brush"}}
+      },
+      "y": {"field":"Count of Accidents","type": "quantitative","title": "Count"},
+      "color": {
+        "field": "Type of Loss"
+      },
+        "opacity": {
+            "condition": {"param": "Loss Type", "value": 1},
+            "value": 0.0
+        },
+      "tooltip": [
+        {"field": "z", "type":"temporal"},
+        {"field": "Count of Accidents"},
+        {"field":"time", "timeUnit":"yearmonth"}
+      ]}
     }
-  }   
     ]
   }
