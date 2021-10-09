@@ -1,9 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {"url": "https://raw.githubusercontent.com/imiirasolii/Homework5/main/Homework5/Data/z.csv"},
+  
   "vconcat": [
     {
-    "width": 750,
+    "width": 625,
     "height": 60,
     "mark": {"type":"line","color": "#424241"},
     "params": [{
@@ -24,7 +25,7 @@
       }
 }
     },{
-    "width": 750,
+    "width": 625,
     "height": 300,
     "mark": {"type": "line", "line":true,"color": "#424241"}, 
     "encoding": {
@@ -42,7 +43,7 @@
     }
   ,
     {
-  "width": 750,
+  "width": 625,
   "height": 300,
   "mark": {"type": "line", "line": true},
   "params": [{
@@ -77,6 +78,16 @@
       {"field": "Type of Loss", "type":"nominal"},
       {"field": "Count of Accidents"}
     ]}
-  }
-  ]
-}
+     },
+     {"transform": [{ "window": [{ "op": "rank", "as": "ranking" }],
+           "sort": [{ "field": "Count of Accidents", "order": "ascending" }]},
+          { "filter": "datum.ranking == 1"},
+          {"calculate": "'The lowest number of monthly accidents of all time occured in October 2020 which was: 89'",
+          "as": "text_annotation"}],
+      "mark": { "type": "text", "align": "left", "dx": -5 },
+                                  "encoding": {
+                                      "text": { "field": "text_annotation" }
+                                  }
+                              }
+     
+  ]}
