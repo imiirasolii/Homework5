@@ -1,72 +1,82 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data": {"url": "https://raw.githubusercontent.com/imiirasolii/Homework5/main/Homework5/Data/z.csv"},
-    "vconcat": [
-      {
-      "width": 500,
-      "height": 60,
-      "mark": "line",
-      "params": [{
-        "name": "brush",
-        "select": {"type": "interval", "encodings": ["x"]}
-      }],
-      "encoding": {
-        "x": {
-          "field": "z",
-          "type": "temporal"
-        },
-        "y": {
-          "aggregate": "sum",
-        "field": "Count of Accidents",
-          "type": "quantitative",
-          "axis": {"tickCount": 3, "grid": false}
-        }
-  }
-      },{
-      "width": 500,
-      "height": 300,
-      "mark": "area",
-      "encoding": {
-        "x": {
-          "field": "z",
-          "type": "temporal",
-          "scale": {"domain": {"param": "brush"}},
-          "axis": {"title": ""}
-        },
-        "y": {"aggregate": "sum",
-        "field": "Count of Accidents",
-         "type": "quantitative"}
-      }
-    },
-      {
-    "width": 500,
-    "height": 300,
-    "mark": "line",
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/imiirasolii/Homework5/main/Homework5/Data/z.csv"},
+  "vconcat": [
+    {
+    "width": 625,
+    "height": 60,
+    "mark": {"type":"line","color": "#424241"},
     "params": [{
-    "name": "Loss Type",
-    "select": {"type": "point", "fields": ["Type of Loss"]},
-    "bind": "legend"
-                }],
+      "name": "brush",
+      "select": {"type": "interval", "encodings": ["x"]}
+    }],
     "encoding": {
       "x": {
         "field": "z",
         "type": "temporal",
-        "axis": {"title":""},
-        "scale": {"domain": {"param": "brush"}}
+        "axis":{"title": ""}
       },
-      "y": {"field":"Count of Accidents","type": "quantitative","title": "Count"},
-      "color": {
-        "field": "Type of Loss"
+      "y": {
+        "aggregate": "sum",
+      "field": "Count of Accidents",
+        "type": "quantitative",
+        "axis": {"title":"","tickCount": 3, "grid": false}
+      }
+}
+    },{
+    "width": 625,
+    "height": 300,
+    "mark": {"type": "line", "line":true,"color": "#424241"}, 
+    "encoding": {
+      "x": {
+        "field": "z",
+        "type": "temporal",
+        "scale": {"domain": {"param": "brush"}},
+        "axis": {"title": "", "titleAlign":"left"}
       },
-        "opacity": {
-            "condition": {"param": "Loss Type", "value": 1},
-            "value": 0.0
-        },
-      "tooltip": [
-        {"field": "z", "type":"temporal"},
-        {"field": "Count of Accidents"},
-        {"field":"time", "timeUnit":"yearmonth"}
-      ]}
+      "y": {"aggregate": "sum",
+      "field": "Count of Accidents",
+       "type": "quantitative",
+       "axis": {"title":""}}
+       }
     }
-    ]
+  ,
+    {
+  "width": 625,
+  "height": 300,
+  "mark": {"type": "line", "line": true},
+  "params": [{
+  "name": "Loss Type",
+  "select": {"type": "point", "fields": ["Type of Loss"]},
+  "bind": "legend"
+              }],
+  "encoding": {
+    "x": {
+      "field": "z",
+      "type": "temporal",
+      "axis": {"title":"Year"},
+      "scale": {"domain": {"param": "brush"}}
+    },
+    "y": {"field":"Count of Accidents","type": "quantitative","title": "Count", "axis": {"title":""}},
+    "color": {
+      "field": "Type of Loss",
+      "sort": [" Not injured", "Minor Injury"," Serious injury", "Fatality"],
+      "scale":{
+        "range": ["#969696","#fcae91","#fb6a4a","#cb181d"
+        ]
+      },
+      "legend":{
+      "orient":"bottom"
+      }},
+      "opacity": {
+          "condition": {"param": "Loss Type", "value": 1},
+          "value": 0.0
+      },
+    "tooltip": [
+      {"field":"z", "timeUnit":"yearmonth", "title": "Date"},
+      {"field": "Type of Loss", "type":"nominal"},
+      {"field": "Count of Accidents"}
+    ]}
   }
+  ]
+}
