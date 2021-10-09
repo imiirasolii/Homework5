@@ -1,10 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": {
-        "text": "Normalized Percentage Difference in Vehicle Incidents between 2019 and 2020 Per Local Government Area",
-        "fontSize": 20
-        },
-    "width": 500,
+    "width": 700,
     "height": 660,
     "projection": {"type": "equirectangular"},
     "data": {
